@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-05-27T09:44:40+00:00\n"
+"POT-Creation-Date: 2025-05-28T10:26:07+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.11.0\n"
 "X-Domain: my-account-customizer-for-woocommerce\n"
@@ -26,7 +26,7 @@ msgstr ""
 
 #. Description of the plugin
 #: my-account-customizer-for-woocommerce.php
-msgid "Customize \"My account\" page. Beautifully."
+msgid "Customize the \"My account\" page. Beautifully."
 msgstr ""
 
 #. Author of the plugin
@@ -40,52 +40,52 @@ msgid "https://profiles.wordpress.org/algoritmika/"
 msgstr ""
 
 #. Translators: %s: Field ID.
-#: includes/class-alg-wc-mac-fields.php:95
+#: includes/class-alg-wc-mac-fields.php:135
 #: includes/settings/class-alg-wc-mac-settings-fields.php:71
 #: includes/settings/class-alg-wc-mac-settings-fields.php:108
 msgid "Field %s"
 msgstr ""
 
-#: includes/class-alg-wc-mac-fields.php:142
+#: includes/class-alg-wc-mac-fields.php:202
 msgid "(required)"
 msgstr ""
 
-#: includes/class-alg-wc-mac-fields.php:254
+#: includes/class-alg-wc-mac-fields.php:368
 #: includes/settings/class-alg-wc-mac-settings-fields.php:160
 msgid "Extra Profile Fields"
 msgstr ""
 
 #. Translators: %s: Field title.
-#: includes/class-alg-wc-mac-fields.php:306
+#: includes/class-alg-wc-mac-fields.php:420
 msgid "<strong>ERROR</strong>: \"%s\" is required."
 msgstr ""
 
-#: includes/class-alg-wc-mac-shortcodes.php:54
+#: includes/class-alg-wc-mac-shortcodes.php:59
 #: includes/settings/class-alg-wc-mac-settings-fields.php:128
 msgid "Date"
 msgstr ""
 
-#: includes/class-alg-wc-mac-shortcodes.php:54
-#: includes/settings/class-alg-wc-mac-settings-tabs.php:183
+#: includes/class-alg-wc-mac-shortcodes.php:60
+#: includes/settings/class-alg-wc-mac-settings-tabs.php:196
 msgid "Content"
 msgstr ""
 
-#: includes/class-alg-wc-mac-shortcodes.php:58
+#: includes/class-alg-wc-mac-shortcodes.php:65
 msgid "No comments found."
 msgstr ""
 
-#: includes/class-alg-wc-mac-shortcodes.php:60
+#: includes/class-alg-wc-mac-shortcodes.php:68
 msgid "Approved"
 msgstr ""
 
-#: includes/class-alg-wc-mac-shortcodes.php:61
+#: includes/class-alg-wc-mac-shortcodes.php:69
 msgid "Unapproved"
 msgstr ""
 
 #. Translators: %s: Tab ID.
 #: includes/class-alg-wc-mac-tabs.php:93
-#: includes/settings/class-alg-wc-mac-settings-tabs.php:113
-#: includes/settings/class-alg-wc-mac-settings-tabs.php:143
+#: includes/settings/class-alg-wc-mac-settings-tabs.php:126
+#: includes/settings/class-alg-wc-mac-settings-tabs.php:156
 msgid "Tab %s"
 msgstr ""
 
@@ -95,7 +95,7 @@ msgstr ""
 
 #: includes/settings/class-alg-wc-mac-settings-fields.php:25
 #: includes/settings/class-alg-wc-mac-settings-fields.php:47
-#: includes/settings/class-alg-wc-mac-settings-general.php:66
+#: includes/settings/class-alg-wc-mac-settings-general.php:47
 msgid "Fields"
 msgstr ""
 
@@ -104,12 +104,12 @@ msgid "Fields Options"
 msgstr ""
 
 #: includes/settings/class-alg-wc-mac-settings-fields.php:42
-#: includes/settings/class-alg-wc-mac-settings-general.php:67
+#: includes/settings/class-alg-wc-mac-settings-general.php:48
 msgid "Adds custom fields to the \"My account > Account details\" tab in frontend, and to the user profile page in backend."
 msgstr ""
 
 #: includes/settings/class-alg-wc-mac-settings-fields.php:48
-#: includes/settings/class-alg-wc-mac-settings-tabs.php:90
+#: includes/settings/class-alg-wc-mac-settings-tabs.php:103
 msgid "Enable section"
 msgstr ""
 
@@ -118,7 +118,7 @@ msgid "Total fields"
 msgstr ""
 
 #: includes/settings/class-alg-wc-mac-settings-fields.php:78
-#: includes/settings/class-alg-wc-mac-settings-tabs.php:120
+#: includes/settings/class-alg-wc-mac-settings-tabs.php:133
 msgid "Enable/Disable"
 msgstr ""
 
@@ -143,7 +143,7 @@ msgstr ""
 #: includes/settings/class-alg-wc-mac-settings-fields.php:95
 #: includes/settings/class-alg-wc-mac-settings-fields.php:104
 #: includes/settings/class-alg-wc-mac-settings-fields.php:140
-#: includes/settings/class-alg-wc-mac-settings-tabs.php:131
+#: includes/settings/class-alg-wc-mac-settings-tabs.php:144
 msgid "Title"
 msgstr ""
 
@@ -154,7 +154,7 @@ msgstr ""
 
 #: includes/settings/class-alg-wc-mac-settings-fields.php:114
 #: includes/settings/class-alg-wc-mac-settings-fields.php:179
-#: includes/settings/class-alg-wc-mac-settings-general.php:62
+#: includes/settings/class-alg-wc-mac-settings-general.php:43
 msgid "Description"
 msgstr ""
 
@@ -240,72 +240,59 @@ msgid "General"
 msgstr ""
 
 #: includes/settings/class-alg-wc-mac-settings-general.php:39
-msgid "My Account Customizer Options"
-msgstr ""
-
-#: includes/settings/class-alg-wc-mac-settings-general.php:44
-#: includes/settings/class-alg-wc-mac-settings.php:26
-msgid "My Account Customizer"
-msgstr ""
-
-#: includes/settings/class-alg-wc-mac-settings-general.php:45
-msgid "Enable plugin"
-msgstr ""
-
-#: includes/settings/class-alg-wc-mac-settings-general.php:58
 msgid "Sections"
 msgstr ""
 
-#: includes/settings/class-alg-wc-mac-settings-general.php:61
+#: includes/settings/class-alg-wc-mac-settings-general.php:42
 msgid "Section"
 msgstr ""
 
-#: includes/settings/class-alg-wc-mac-settings-general.php:72
-#: includes/settings/class-alg-wc-mac-settings-tabs.php:25
-#: includes/settings/class-alg-wc-mac-settings-tabs.php:89
+#: includes/settings/class-alg-wc-mac-settings-general.php:53
+#: includes/settings/class-alg-wc-mac-settings-tabs.php:26
+#: includes/settings/class-alg-wc-mac-settings-tabs.php:102
 msgid "Tabs"
 msgstr ""
 
-#: includes/settings/class-alg-wc-mac-settings-general.php:73
-#: includes/settings/class-alg-wc-mac-settings-tabs.php:84
+#: includes/settings/class-alg-wc-mac-settings-general.php:54
+#: includes/settings/class-alg-wc-mac-settings-tabs.php:97
 msgid "Adds custom tabs to the \"My account\" page."
 msgstr ""
 
-#: includes/settings/class-alg-wc-mac-settings-general.php:88
+#: includes/settings/class-alg-wc-mac-settings-general.php:69
 msgid "Advanced Options"
 msgstr ""
 
-#: includes/settings/class-alg-wc-mac-settings-general.php:93
+#: includes/settings/class-alg-wc-mac-settings-general.php:74
 msgid "Load shortcodes"
 msgstr ""
 
-#: includes/settings/class-alg-wc-mac-settings-general.php:94
+#: includes/settings/class-alg-wc-mac-settings-general.php:75
 msgid "Enable"
 msgstr ""
 
 #. Translators: %s: Shortcode list.
-#: includes/settings/class-alg-wc-mac-settings-general.php:97
-msgid "Will load plugin shortcodes, e.g. %s, etc."
+#: includes/settings/class-alg-wc-mac-settings-general.php:78
+msgid "Will load plugin shortcodes, e.g., %s, etc."
 msgstr ""
 
-#: includes/settings/class-alg-wc-mac-settings-general.php:108
+#: includes/settings/class-alg-wc-mac-settings-general.php:89
 msgid "Load \"Font Awesome\""
 msgstr ""
 
-#: includes/settings/class-alg-wc-mac-settings-general.php:109
+#: includes/settings/class-alg-wc-mac-settings-general.php:90
 msgid "Load"
 msgstr ""
 
 #. Translators: %s: Site link.
-#: includes/settings/class-alg-wc-mac-settings-general.php:113
+#: includes/settings/class-alg-wc-mac-settings-general.php:94
 msgid "Will load \"%s\" library on the \"My account\" page."
 msgstr ""
 
-#: includes/settings/class-alg-wc-mac-settings-general.php:116
+#: includes/settings/class-alg-wc-mac-settings-general.php:97
 msgid "Only mark this if you are not loading \"Font Awesome\" anywhere else. \"Font Awesome\" is responsible for creating icons."
 msgstr ""
 
-#: includes/settings/class-alg-wc-mac-settings-general.php:123
+#: includes/settings/class-alg-wc-mac-settings-general.php:104
 msgid "\"Font Awesome\" library URL."
 msgstr ""
 
@@ -313,113 +300,117 @@ msgstr ""
 msgid "New settings fields will be displayed if you change this option and \"Save changes\"."
 msgstr ""
 
-#: includes/settings/class-alg-wc-mac-settings-tabs.php:64
+#: includes/settings/class-alg-wc-mac-settings-tabs.php:74
 msgid "Select all"
 msgstr ""
 
-#: includes/settings/class-alg-wc-mac-settings-tabs.php:65
+#: includes/settings/class-alg-wc-mac-settings-tabs.php:77
 msgid "Deselect all"
 msgstr ""
 
-#: includes/settings/class-alg-wc-mac-settings-tabs.php:83
+#: includes/settings/class-alg-wc-mac-settings-tabs.php:96
 msgid "Custom Tabs Options"
 msgstr ""
 
-#: includes/settings/class-alg-wc-mac-settings-tabs.php:96
+#: includes/settings/class-alg-wc-mac-settings-tabs.php:109
 msgid "Total tabs"
 msgstr ""
 
 #. Translators: %s: Tab ID.
-#: includes/settings/class-alg-wc-mac-settings-tabs.php:123
+#: includes/settings/class-alg-wc-mac-settings-tabs.php:136
 msgid "Enable tab %s"
 msgstr ""
 
-#: includes/settings/class-alg-wc-mac-settings-tabs.php:133
+#: includes/settings/class-alg-wc-mac-settings-tabs.php:146
 msgid "Can not be empty."
 msgstr ""
 
 #. Translators: %s: Shortcode example.
-#: includes/settings/class-alg-wc-mac-settings-tabs.php:136
-#: includes/settings/class-alg-wc-mac-settings-tabs.php:154
-#: includes/settings/class-alg-wc-mac-settings-tabs.php:174
-#: includes/settings/class-alg-wc-mac-settings-tabs.php:186
-#: includes/settings/class-alg-wc-mac-settings-tabs.php:207
+#: includes/settings/class-alg-wc-mac-settings-tabs.php:149
+#: includes/settings/class-alg-wc-mac-settings-tabs.php:167
+#: includes/settings/class-alg-wc-mac-settings-tabs.php:187
+#: includes/settings/class-alg-wc-mac-settings-tabs.php:199
+#: includes/settings/class-alg-wc-mac-settings-tabs.php:220
 msgid "You can use shortcodes here, e.g.: %s."
 msgstr ""
 
-#: includes/settings/class-alg-wc-mac-settings-tabs.php:149
+#: includes/settings/class-alg-wc-mac-settings-tabs.php:162
 msgid "ID"
 msgstr ""
 
-#: includes/settings/class-alg-wc-mac-settings-tabs.php:151
+#: includes/settings/class-alg-wc-mac-settings-tabs.php:164
 msgid "If empty, then it will automatically generated from the title."
 msgstr ""
 
-#: includes/settings/class-alg-wc-mac-settings-tabs.php:163
+#: includes/settings/class-alg-wc-mac-settings-tabs.php:176
 msgid "Icon"
 msgstr ""
 
 #. Translators: %1$s: Icon code example, %2$s: Site link.
-#: includes/settings/class-alg-wc-mac-settings-tabs.php:166
-msgid "You need to enter icon code here, e.g. %1$s. Icon codes are available on %2$s site."
+#: includes/settings/class-alg-wc-mac-settings-tabs.php:179
+msgid "You need to enter icon code here, e.g., %1$s. Icon codes are available on %2$s site."
 msgstr ""
 
-#: includes/settings/class-alg-wc-mac-settings-tabs.php:171
+#: includes/settings/class-alg-wc-mac-settings-tabs.php:184
 msgid "Will use the default icon if empty."
 msgstr ""
 
-#: includes/settings/class-alg-wc-mac-settings-tabs.php:195
+#: includes/settings/class-alg-wc-mac-settings-tabs.php:208
 msgid "Position"
 msgstr ""
 
 #. Translators: %1$s: Tab ID example, %2$s: Tab ID example.
-#: includes/settings/class-alg-wc-mac-settings-tabs.php:199
+#: includes/settings/class-alg-wc-mac-settings-tabs.php:212
 msgid "Enter tab ID here. E.g.: %1$s or %2$s. Custom tab will be added right after it."
 msgstr ""
 
-#: includes/settings/class-alg-wc-mac-settings-tabs.php:203
+#: includes/settings/class-alg-wc-mac-settings-tabs.php:216
 msgid "Leave empty to add to the last position."
 msgstr ""
 
-#: includes/settings/class-alg-wc-mac-settings-tabs.php:215
+#: includes/settings/class-alg-wc-mac-settings-tabs.php:228
 msgid "Visibility"
 msgstr ""
 
-#: includes/settings/class-alg-wc-mac-settings-tabs.php:221
+#: includes/settings/class-alg-wc-mac-settings-tabs.php:234
 msgid "All user roles"
 msgstr ""
 
-#: includes/settings/class-alg-wc-mac-settings-tabs.php:222
+#: includes/settings/class-alg-wc-mac-settings-tabs.php:235
 msgid "Exclude selected user roles"
 msgstr ""
 
-#: includes/settings/class-alg-wc-mac-settings-tabs.php:223
+#: includes/settings/class-alg-wc-mac-settings-tabs.php:236
 msgid "Require selected user roles"
 msgstr ""
 
-#: includes/settings/class-alg-wc-mac-settings-tabs.php:227
+#: includes/settings/class-alg-wc-mac-settings-tabs.php:240
 msgid "User roles."
 msgstr ""
 
-#: includes/settings/class-alg-wc-mac-settings-tabs.php:227
-#: includes/settings/class-alg-wc-mac-settings-tabs.php:247
+#: includes/settings/class-alg-wc-mac-settings-tabs.php:240
+#: includes/settings/class-alg-wc-mac-settings-tabs.php:260
 msgid "Ignored if empty."
 msgstr ""
 
-#: includes/settings/class-alg-wc-mac-settings-tabs.php:241
+#: includes/settings/class-alg-wc-mac-settings-tabs.php:254
 msgid "All users"
 msgstr ""
 
-#: includes/settings/class-alg-wc-mac-settings-tabs.php:242
+#: includes/settings/class-alg-wc-mac-settings-tabs.php:255
 msgid "Exclude selected users"
 msgstr ""
 
-#: includes/settings/class-alg-wc-mac-settings-tabs.php:243
+#: includes/settings/class-alg-wc-mac-settings-tabs.php:256
 msgid "Require selected users"
 msgstr ""
 
-#: includes/settings/class-alg-wc-mac-settings-tabs.php:247
+#: includes/settings/class-alg-wc-mac-settings-tabs.php:260
 msgid "Users."
+msgstr ""
+
+#: includes/settings/class-alg-wc-mac-settings.php:26
+msgid "My Account Customizer"
 msgstr ""
 
 #: includes/settings/class-alg-wc-mac-settings.php:49

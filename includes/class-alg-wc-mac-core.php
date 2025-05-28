@@ -38,30 +38,30 @@ class Alg_WC_MAC_Core {
 	 *
 	 * @todo    (dev) move this to `class-alg-wc-mac.php`?
 	 * @todo    (feature) option to change icons for the existing/default "My account" sections
-	 * @todo    (feature) "Privacy section" (i.e. emails they want to receive, etc.)
+	 * @todo    (feature) "Privacy section" (i.e., emails they want to receive, etc.)
 	 * @todo    (dev) only load/run anything if it's `is_account_page()`?
 	 */
 	function __construct() {
-		if ( 'yes' === get_option( 'alg_wc_mac_plugin_enabled', 'yes' ) ) {
 
-			// Shortcodes
-			if ( 'yes' === get_option( 'alg_wc_mac_load_shortcodes', 'yes' ) ) {
-				require_once plugin_dir_path( __FILE__ ) . 'class-alg-wc-mac-shortcodes.php';
-			}
-
-			// Font Awesome
-			if ( 'yes' === get_option( 'alg_wc_mac_load_font_awesome', 'no' ) ) {
-				add_action( 'wp_enqueue_scripts', array( $this, 'load_font_awesome' ) );
-			}
-
-			// "Account details" fields
-			$this->fields = require_once plugin_dir_path( __FILE__ ) . 'class-alg-wc-mac-fields.php';
-
-			// Custom tabs
-			$this->tabs = require_once plugin_dir_path( __FILE__ ) . 'class-alg-wc-mac-tabs.php';
-
+		// Shortcodes
+		if ( 'yes' === get_option( 'alg_wc_mac_load_shortcodes', 'yes' ) ) {
+			require_once plugin_dir_path( __FILE__ ) . 'class-alg-wc-mac-shortcodes.php';
 		}
+
+		// Font Awesome
+		if ( 'yes' === get_option( 'alg_wc_mac_load_font_awesome', 'no' ) ) {
+			add_action( 'wp_enqueue_scripts', array( $this, 'load_font_awesome' ) );
+		}
+
+		// "Account details" fields
+		$this->fields = require_once plugin_dir_path( __FILE__ ) . 'class-alg-wc-mac-fields.php';
+
+		// Custom tabs
+		$this->tabs = require_once plugin_dir_path( __FILE__ ) . 'class-alg-wc-mac-tabs.php';
+
+		// Core loaded
 		do_action( 'alg_wc_mac_core_loaded' );
+
 	}
 
 	/**

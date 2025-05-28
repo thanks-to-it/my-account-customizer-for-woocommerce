@@ -2,7 +2,7 @@
 /**
  * My Account Customizer for WooCommerce - General Section Settings
  *
- * @version 1.1.0
+ * @version 2.0.0
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd
@@ -29,29 +29,10 @@ class Alg_WC_MAC_Settings_General extends Alg_WC_MAC_Settings_Section {
 	/**
 	 * get_settings.
 	 *
-	 * @version 1.1.0
+	 * @version 2.0.0
 	 * @since   1.0.0
 	 */
 	function get_settings() {
-
-		$plugin_settings = array(
-			array(
-				'title'    => __( 'My Account Customizer Options', 'my-account-customizer-for-woocommerce' ),
-				'type'     => 'title',
-				'id'       => 'alg_wc_mac_plugin_options',
-			),
-			array(
-				'title'    => __( 'My Account Customizer', 'my-account-customizer-for-woocommerce' ),
-				'desc'     => '<strong>' . __( 'Enable plugin', 'my-account-customizer-for-woocommerce' ) . '</strong>',
-				'id'       => 'alg_wc_mac_plugin_enabled',
-				'default'  => 'yes',
-				'type'     => 'checkbox',
-			),
-			array(
-				'type'     => 'sectionend',
-				'id'       => 'alg_wc_mac_plugin_options',
-			),
-		);
 
 		$sections = array(
 			array(
@@ -94,7 +75,7 @@ class Alg_WC_MAC_Settings_General extends Alg_WC_MAC_Settings_Section {
 				'desc'     => __( 'Enable', 'my-account-customizer-for-woocommerce' ),
 				'desc_tip' => sprintf(
 					/* Translators: %s: Shortcode list. */
-					__( 'Will load plugin shortcodes, e.g. %s, etc.', 'my-account-customizer-for-woocommerce' ),
+					__( 'Will load plugin shortcodes, e.g., %s, etc.', 'my-account-customizer-for-woocommerce' ),
 					'<code>' . implode( '</code>, <code>', array(
 						'[alg_wc_mac_user_comments]',
 						'[alg_wc_mac_translate]',
@@ -132,7 +113,10 @@ class Alg_WC_MAC_Settings_General extends Alg_WC_MAC_Settings_Section {
 			),
 		);
 
-		return array_merge( $plugin_settings, $sections, $advanced_settings );
+		return array_merge(
+			$sections,
+			$advanced_settings
+		);
 	}
 
 }

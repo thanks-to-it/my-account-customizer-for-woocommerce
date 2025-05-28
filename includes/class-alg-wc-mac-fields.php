@@ -29,21 +29,61 @@ class Alg_WC_MAC_Fields {
 	 * @since   1.1.0
 	 *
 	 * @todo    (dev) move to `init` hook?
-	 * @todo    (feature) `is_admin`: option to NOT show fields for the current user (i.e. show for admin only)
+	 * @todo    (feature) `is_admin`: option to NOT show fields for the current user (i.e., show for admin only)
 	 */
 	function __construct() {
 		if ( 'yes' === get_option( 'alg_wc_mac_fields_section_enabled', 'no' ) ) {
+
 			if ( ! is_admin() ) {
-				add_action( 'woocommerce_edit_account_form',                    array( $this, 'edit_account_form' ) );
-				add_action( 'woocommerce_save_account_details',                 array( $this, 'save_account_details' ) );
-				add_filter( 'woocommerce_save_account_details_required_fields', array( $this, 'save_account_details_required_fields' ) );
+
+				add_action(
+					'woocommerce_edit_account_form',
+					array( $this, 'edit_account_form' )
+				);
+
+				add_action(
+					'woocommerce_save_account_details',
+					array( $this, 'save_account_details' )
+				);
+
+				add_filter(
+					'woocommerce_save_account_details_required_fields',
+					array( $this, 'save_account_details_required_fields' )
+				);
+
 			} else {
-				add_action( 'show_user_profile',                                array( $this, 'admin_show_extra_profile_fields' ), PHP_INT_MAX );
-				add_action( 'edit_user_profile',                                array( $this, 'admin_show_extra_profile_fields' ), PHP_INT_MAX );
-				add_action( 'personal_options_update',                          array( $this, 'admin_update_profile_fields' ) );
-				add_action( 'edit_user_profile_update',                         array( $this, 'admin_update_profile_fields' ) );
-				add_action( 'user_profile_update_errors',                       array( $this, 'admin_user_profile_update_errors' ), PHP_INT_MAX, 3 );
+
+				add_action(
+					'show_user_profile',
+					array( $this, 'admin_show_extra_profile_fields' ),
+					PHP_INT_MAX
+				);
+
+				add_action(
+					'edit_user_profile',
+					array( $this, 'admin_show_extra_profile_fields' ),
+					PHP_INT_MAX
+				);
+
+				add_action(
+					'personal_options_update',
+					array( $this, 'admin_update_profile_fields' )
+				);
+
+				add_action(
+					'edit_user_profile_update',
+					array( $this, 'admin_update_profile_fields' )
+				);
+
+				add_action(
+					'user_profile_update_errors',
+					array( $this, 'admin_user_profile_update_errors' ),
+					PHP_INT_MAX,
+					3
+				);
+
 			}
+
 		}
 	}
 
@@ -53,7 +93,7 @@ class Alg_WC_MAC_Fields {
 	 * @version 2.0.0
 	 * @since   1.0.0
 	 *
-	 * @todo    (dev) run `do_shortcode()` later, e.g. in `get_field_html()`?
+	 * @todo    (dev) run `do_shortcode()` later, e.g., in `get_field_html()`?
 	 * @todo    (feature) visibility: customer/admin
 	 * @todo    (feature) type: textarea
 	 * @todo    (feature) type: (maybe) date/time picker
@@ -131,22 +171,52 @@ class Alg_WC_MAC_Fields {
 
 		// "Title" field
 		if ( 'title' === $field_data['type'] ) {
-			return ( $is_admin ?
+			return (
+				$is_admin ?
 				'' :
-				'<h3>' . esc_html( $field_data['title'] ) . '</h3>' . ( '' != $field_data['desc'] ? '<p><em>' . $field_data['desc'] . '</em></p>' : '' ) );
+				(
+					'<h3>' . esc_html( $field_data['title'] ) . '</h3>' .
+					(
+						'' != $field_data['desc'] ?
+						'<p><em>' . $field_data['desc'] . '</em></p>' :
+						''
+					)
+				)
+			);
 		}
 
 		// All other fields
-		$value    = ( $this->do_save_field_type( $field_data['type'] ) ? esc_attr( get_user_meta( $user_id, $field_id, true ) ) : false );
-		$required = ( $this->do_save_field_type( $field_data['type'] ) && 'yes' === $field_data['required'] ? ( $is_admin ?
-				' <span class="description">' . __( '(required)', 'my-account-customizer-for-woocommerce' ) . '</span>' :
-				'&nbsp;<span class="required">*</span>' ) :
-			'' );
-		$label    = '<label for="' . $field_id . '">' . esc_html( $field_data['title'] ) . $required . '</label>';
-		$desc     = ( '' != $field_data['desc'] ? ( $is_admin ?
+		$value    = (
+			$this->do_save_field_type( $field_data['type'] ) ?
+			esc_attr( get_user_meta( $user_id, $field_id, true ) ) :
+			false
+		);
+		$required = (
+			(
+				$this->do_save_field_type( $field_data['type'] ) &&
+				'yes' === $field_data['required']
+			) ?
+			(
+				$is_admin ?
+				' <span class="description">' .
+					__( '(required)', 'my-account-customizer-for-woocommerce' ) .
+				'</span>' :
+				'&nbsp;<span class="required">*</span>'
+			) :
+			''
+		);
+		$label    = '<label for="' . $field_id . '">' .
+			esc_html( $field_data['title'] ) . $required .
+		'</label>';
+		$desc     = (
+			'' != $field_data['desc'] ?
+			(
+				$is_admin ?
 				'<p class="description">' . $field_data['desc'] . '</p>' :
-				' <span><em>' . $field_data['desc'] . '</em></span>' ) :
-			'' );
+				' <span><em>' . $field_data['desc'] . '</em></span>'
+			) :
+			''
+		);
 		switch ( $field_data['type'] ) {
 			case 'gravatar':
 				$input = get_avatar( $user_id );
@@ -154,24 +224,65 @@ class Alg_WC_MAC_Fields {
 			default:
 				$input = '<input' .
 						' type="'  . $field_data['type'] . '"' .
-						' class="' . ( $is_admin ?
+						' class="' . (
+							$is_admin ?
 							'regular-' . $field_data['type'] :
-							'woocommerce-Input woocommerce-Input--' . $field_data['type'] . ' input-' . $field_data['type'] ) . '"' .
+							'woocommerce-Input woocommerce-Input--' . $field_data['type'] . ' input-' . $field_data['type']
+						) . '"' .
 						' name="'  . $field_id . '"' .
 						' id="'    . $field_id . '"' .
 						' value="' . $value . '"' .
 					' />';
 				break;
 		}
-		return ( $is_admin ?
+		return (
+			$is_admin ?
 			'<tr><th>' . $label . '</th><td>' . $input . $desc . '</td></tr>' :
-			'<p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">' . $label . $input . $desc . '</p>' . '<div class="clear"></div>' );
+			'<p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">' .
+				$label . $input . $desc .
+			'</p>' . '<div class="clear"></div>'
+		);
+
+	}
+
+	/**
+	 * get_allowed_html.
+	 *
+	 * @version 2.0.0
+	 * @since   2.0.0
+	 */
+	function get_allowed_html() {
+		$allowed_html = array(
+			'input' => array(
+				'type'  => true,
+				'id'    => true,
+				'name'  => true,
+				'class' => true,
+				'style' => true,
+				'value' => true,
+			),
+			'img' => array(
+				'alt'      => true,
+				'src'      => true,
+				'class'    => true,
+				'height'   => true,
+				'width'    => true,
+				'loading'  => true,
+				'srcset'   => true,
+				'decoding' => true,
+				'value'    => true,
+			),
+		);
+		return array_merge(
+			wp_kses_allowed_html( 'post' ),
+			$allowed_html
+		);
 	}
 
 	/**
 	 * edit_account_form.
 	 *
-	 * @version 1.1.0
+	 * @version 2.0.0
 	 * @since   1.0.0
 	 */
 	function edit_account_form() {
@@ -180,7 +291,7 @@ class Alg_WC_MAC_Fields {
 		foreach ( $this->get_fields() as $field_id => $field_data ) {
 			$html .= $this->get_field_html( $user_id, $field_id, $field_data, false );
 		}
-		echo $html;
+		echo wp_kses( $html, $this->get_allowed_html() );
 	}
 
 	/**
@@ -224,7 +335,10 @@ class Alg_WC_MAC_Fields {
 	 * @since   1.0.0
 	 */
 	function admin_check_current_user( $user_id ) {
-		return ( current_user_can( 'manage_woocommerce' ) && current_user_can( 'edit_user', $user_id ) );
+		return (
+			current_user_can( 'manage_woocommerce' ) &&
+			current_user_can( 'edit_user', $user_id )
+		);
 	}
 
 	/**
@@ -256,7 +370,7 @@ class Alg_WC_MAC_Fields {
 					) .
 				'</h2>' .
 				'<table class="form-table"><tbody>' .
-					$html .
+					wp_kses( $html, $this->get_allowed_html() ) .
 				'</tbody></table>'
 			);
 		}

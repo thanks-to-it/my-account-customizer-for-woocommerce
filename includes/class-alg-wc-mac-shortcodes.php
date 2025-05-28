@@ -2,7 +2,7 @@
 /**
  * My Account Customizer for WooCommerce - Shortcodes Class
  *
- * @version 1.2.0
+ * @version 2.0.0
  * @since   1.1.0
  *
  * @author  Algoritmika Ltd
@@ -30,7 +30,7 @@ class Alg_WC_MAC_Shortcodes {
 	/**
 	 * user_comments.
 	 *
-	 * @version 1.2.0
+	 * @version 2.0.0
 	 * @since   1.1.0
 	 *
 	 * @see     https://developer.wordpress.org/reference/functions/get_comments/
@@ -38,29 +38,39 @@ class Alg_WC_MAC_Shortcodes {
 	 * @see     https://developer.wordpress.org/reference/classes/wp_comment/
 	 *
 	 * @todo    (dev) `$args`: add more?
-	 * @todo    (dev) placeholders: add more, e.g. `review_rating`, `comment_author_IP`?
-	 * @todo    (dev) placeholders: format, e.g. `comment_type`?
+	 * @todo    (dev) placeholders: add more, e.g., `review_rating`, `comment_author_IP`?
+	 * @todo    (dev) placeholders: format, e.g., `comment_type`?
 	 */
 	function user_comments( $atts, $content = '' ) {
+
 		$default_atts = array(
+
 			// Query
 			'type'            => '',
 			'orderby'         => '',
 			'order'           => 'DESC',
 			'number'          => '',
 			'status'          => 'all',
+
 			// Output
 			'before'          => '<table><tbody>' .
-				sprintf( '<tr><th>%s</th><th>%s</th></tr>', __( 'Date', 'my-account-customizer-for-woocommerce' ), __( 'Content', 'my-account-customizer-for-woocommerce' ) ),
+				sprintf(
+					'<tr><th>%s</th><th>%s</th></tr>',
+					__( 'Date', 'my-account-customizer-for-woocommerce' ),
+					__( 'Content', 'my-account-customizer-for-woocommerce' )
+				),
 			'after'           => '</tbody></table>',
 			'row'             => '<tr><td>%comment_date%</td><td>%comment_content%</td></tr>',
 			'glue'            => '',
 			'on_empty'        => __( 'No comments found.', 'my-account-customizer-for-woocommerce' ),
+
 			// Formating
 			'on_approved'     => __( 'Approved', 'my-account-customizer-for-woocommerce' ),
 			'on_unapproved'   => __( 'Unapproved', 'my-account-customizer-for-woocommerce' ),
 			'datetime_format' => get_option( 'date_format' ) . ' ' . get_option( 'time_format' ),
+
 		);
+
 		$atts         = shortcode_atts( $default_atts, $atts, 'alg_wc_mac_user_comments' );
 		$rows         = array();
 		$args         = array(
@@ -72,7 +82,9 @@ class Alg_WC_MAC_Shortcodes {
 			'status'  => $atts['status'],
 		);
 		$comments     = get_comments( $args );
+
 		foreach ( $comments as $i => $comment ) {
+
 			$placeholders = array(
 				'%comment_nr%'          => ( $i + 1 ),
 				'%comment_ID%'          => $comment->comment_ID,
@@ -89,30 +101,64 @@ class Alg_WC_MAC_Shortcodes {
 				'%comment_post_link%'   => ( $comment->comment_post_ID ? get_the_permalink( $comment->comment_post_ID ) : '' ),
 				'%comment_post_title%'  => ( $comment->comment_post_ID ? get_the_title(     $comment->comment_post_ID ) : '' ),
 			);
-			$rows[] = str_replace( array_keys( $placeholders ), $placeholders, $atts['row'] );
+
+			$rows[] = str_replace(
+				array_keys( $placeholders ),
+				$placeholders,
+				$atts['row']
+			);
+
 		}
-		return ( ! empty( $rows ) ? ( $atts['before'] . implode( $atts['glue'], $rows ) . $atts['after'] ) : $atts['on_empty'] );
+
+		return (
+			! empty( $rows ) ?
+			(
+				wp_kses_post( $atts['before'] ) .
+				implode( wp_kses_post( $atts['glue'] ), $rows ) .
+				wp_kses_post( $atts['after'] )
+			) :
+			wp_kses_post( $atts['on_empty'] )
+		);
 	}
 
 	/**
 	 * translate.
 	 *
-	 * @version 1.1.0
+	 * @version 2.0.0
 	 * @since   1.1.0
 	 *
 	 * @todo    (dev) return `do_shortcode( $content )`?
 	 */
 	function translate( $atts, $content = '' ) {
+
 		// E.g.: `[alg_wc_mac_translate lang="EN,DE" lang_text="Text for EN & DE" not_lang_text="Text for other languages"]`
-		if ( isset( $atts['lang_text'] ) && isset( $atts['not_lang_text'] ) && ! empty( $atts['lang'] ) ) {
-			return ( ! defined( 'ICL_LANGUAGE_CODE' ) || ! in_array( strtolower( ICL_LANGUAGE_CODE ), array_map( 'trim', explode( ',', strtolower( $atts['lang'] ) ) ) ) ) ?
-				$atts['not_lang_text'] : $atts['lang_text'];
+		if (
+			isset( $atts['lang_text'], $atts['not_lang_text'] ) &&
+			! empty( $atts['lang'] )
+		) {
+			return (
+				(
+					! defined( 'ICL_LANGUAGE_CODE' ) ||
+					! in_array(
+						strtolower( ICL_LANGUAGE_CODE ),
+						array_map( 'trim', explode( ',', strtolower( $atts['lang'] ) ) )
+					)
+				) ?
+				wp_kses_post( $atts['not_lang_text'] ) :
+				wp_kses_post( $atts['lang_text'] )
+			);
 		}
+
 		// E.g.: `[alg_wc_mac_translate lang="EN,DE"]Text for EN & DE[/alg_wc_mac_translate][alg_wc_mac_translate not_lang="EN,DE"]Text for other languages[/alg_wc_mac_translate]`
 		return (
-			( ! empty( $atts['lang'] )     && ( ! defined( 'ICL_LANGUAGE_CODE' ) || ! in_array( strtolower( ICL_LANGUAGE_CODE ), array_map( 'trim', explode( ',', strtolower( $atts['lang'] ) ) ) ) ) ) ||
-			( ! empty( $atts['not_lang'] ) &&     defined( 'ICL_LANGUAGE_CODE' ) &&   in_array( strtolower( ICL_LANGUAGE_CODE ), array_map( 'trim', explode( ',', strtolower( $atts['not_lang'] ) ) ) ) )
-		) ? '' : $content;
+			(
+				( ! empty( $atts['lang'] )     && ( ! defined( 'ICL_LANGUAGE_CODE' ) || ! in_array( strtolower( ICL_LANGUAGE_CODE ), array_map( 'trim', explode( ',', strtolower( $atts['lang'] ) ) ) ) ) ) ||
+				( ! empty( $atts['not_lang'] ) &&     defined( 'ICL_LANGUAGE_CODE' ) &&   in_array( strtolower( ICL_LANGUAGE_CODE ), array_map( 'trim', explode( ',', strtolower( $atts['not_lang'] ) ) ) ) )
+			) ?
+			'' :
+			wp_kses_post( $content )
+		);
+
 	}
 
 }

@@ -2,7 +2,7 @@
 /*
 Plugin Name: My Account Customizer for WooCommerce
 Plugin URI: https://wordpress.org/plugins/my-account-customizer-for-woocommerce/
-Description: Customize "My account" page. Beautifully.
+Description: Customize the "My account" page. Beautifully.
 Version: 2.0.0-dev
 Author: Algoritmika Ltd
 Author URI: https://profiles.wordpress.org/algoritmika/
@@ -37,7 +37,7 @@ if ( 'my-account-customizer-for-woocommerce.php' === basename( __FILE__ ) ) {
 	}
 }
 
-defined( 'ALG_WC_MAC_VERSION' ) || define( 'ALG_WC_MAC_VERSION', '2.0.0-dev-20250527-0943' );
+defined( 'ALG_WC_MAC_VERSION' ) || define( 'ALG_WC_MAC_VERSION', '2.0.0-dev-20250528-1024' );
 
 defined( 'ALG_WC_MAC_FILE' ) || define( 'ALG_WC_MAC_FILE', __FILE__ );
 

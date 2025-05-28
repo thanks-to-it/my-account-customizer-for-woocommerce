@@ -7,21 +7,45 @@ Stable tag: 1.3.3
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
-Customize "My account" page. Beautifully.
+Customize the "My account" page. Beautifully.
 
 == Description ==
 
-**My Account Customizer for WooCommerce** plugin lets you customize "My account" page.
+**My Account Customizer for WooCommerce** plugin lets you customize the "My account" page.
 
-### &#9989; Fields ###
+### 🚀 Add Extra Fields & Tabs to WooCommerce User Accounts ###
 
-Adds **custom fields** to the "My account > Account details" tab in frontend, and to the user profile page in backend.
+Enhance your WooCommerce "My Account" section with the "My Account Customizer" plugin, offering diverse field types, additional tabs, multilingual support, and dynamic content for a personalized user dashboard experience.
 
-### &#9989; Tabs ###
+### 🚀 Add New Fields in My Account Page ###
 
-Adds **custom tabs** to the "My account" page.
+Enhance the "Account details" tab and user profile page by adding new, custom fields.
 
-### &#128472; Feedback ###
+Select from multiple field types, including Color, Date, Email, Month, Number, Password, Range, Tel, Text, Time, URL, Week, Gravatar (Profile Picture), and Title.
+
+These diverse options enable a rich customization of the user profile, facilitating the collection of a wide range of customer information and enhancing the personalization of their shopping experience on your WooCommerce store.
+
+### 🚀 Create Additional Tabs in My Account Dashboard ###
+
+Create extra tabs in the "My Account" section, offering an organized way to display varied content like user-specific data or custom interactions.
+
+This extra tab can enhance the user dashboard with more functionality, allowing your users to find their information easier.
+
+### 🚀 Dynamic Content with Shortcodes and Advanced Customization ###
+
+Combine the power of shortcodes and advanced customization options for enhancing the "My Account" dashboard.
+
+Utilize shortcodes like `[alg_wc_mac_user_comments]` for dynamic content displays and integrate "Font Awesome" icons for enriched visual appeal.
+
+The plugin's advanced settings, including shortcode loading and iconography options, offer extensive customization capabilities, ensuring your "My Account" section is both functionally rich and visually engaging.
+
+### 🚀 Multilingual Support with WPML & Polylang ###
+
+The plugin offers full multilingual compatibility, seamlessly integrating with popular translation plugins like WPML and Polylang.
+
+This ensures that all custom fields and tabs added to the "My Account" section can be translated, catering to a diverse, global customer base.
+
+### 🗘 Feedback ###
 
 * We are open to your suggestions and feedback. Thank you for using or trying out one of our plugins!
 * Head to the plugin [GitHub Repository](https://github.com/thanks-to-it/my-account-customizer-for-woocommerce) to find out how you can pitch in.
@@ -34,7 +58,7 @@ Adds **custom tabs** to the "My account" page.
 
 == Changelog ==
 
-= 2.0.0 - 27/05/2025 =
+= 2.0.0 - 28/05/2025 =
 * Dev - Security - Output escaped.
 * Dev - PHP v8.2 compatibility (dynamic properties).
 * Dev - Code refactoring.
@@ -78,7 +102,7 @@ Adds **custom tabs** to the "My account" page.
 * Dev - Fields - Applying shortcodes in "Title" and "Description" options now.
 * Dev - Fields - "Enable section" option added.
 * Dev - Fields - "Gravatar (Profile Picture)" type added.
-* Dev - Fields - "Description" is outputted without `esc_html()` now (i.e. HTML is allowed now). "Description" field type in settings changed to `textarea` (was `text`).
+* Dev - Fields - "Description" is outputted without `esc_html()` now (i.e., HTML is allowed now). "Description" field type in settings changed to `textarea` (was `text`).
 * Dev - "Tabs" section added.
 * Dev - Shortcodes - `[alg_wc_mac_user_comments]` shortcode added.
 * Dev - Shortcodes - `[alg_wc_mac_translate]` shortcode added.

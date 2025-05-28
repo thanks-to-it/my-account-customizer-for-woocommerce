@@ -17,40 +17,49 @@ class Alg_WC_MAC_Settings_Tabs extends Alg_WC_MAC_Settings_Section {
 	/**
 	 * Constructor.
 	 *
-	 * @version 1.3.0
+	 * @version 2.0.0
 	 * @since   1.1.0
 	 */
 	function __construct() {
+
 		$this->id   = 'tabs';
 		$this->desc = __( 'Tabs', 'my-account-customizer-for-woocommerce' );
 		parent::__construct();
-		add_action( 'admin_footer', array( $this, 'add_admin_script' ) );
+
+		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
+
 	}
 
 	/**
-	 * add_admin_script.
+	 * enqueue_scripts.
 	 *
-	 * @version 1.3.0
+	 * @version 2.0.0
 	 * @since   1.3.0
-	 *
-	 * @todo    (v2.0.0) move this to a separate js file
-	 * @todo    (dev) load on needed pages only
 	 */
-	function add_admin_script() {
-		?><script>
-			jQuery( document ).ready( function() {
-				jQuery( '.alg-wc-mac-select-all' ).click( function( event ) {
-					event.preventDefault();
-					jQuery( this ).closest( 'td' ).find( 'select.chosen_select' ).select2( 'destroy' ).find( 'option' ).prop( 'selected', 'selected' ).end().select2();
-					return false;
-				} );
-				jQuery( '.alg-wc-mac-deselect-all' ).click( function( event ) {
-					event.preventDefault();
-					jQuery( this ).closest( 'td' ).find( 'select.chosen_select' ).val( '' ).change();
-					return false;
-				} );
-			} );
-		</script><?php
+	function enqueue_scripts( $hook_suffix ) {
+
+		// phpcs:disable WordPress.Security.NonceVerification.Recommended
+		if (
+			! isset( $_GET['page'], $_GET['tab'], $_GET['section'] ) ||
+			'wc-settings' !== $_GET['page'] ||
+			'alg_wc_mac'  !== $_GET['tab'] ||
+			'tabs'        !== $_GET['section']
+		) {
+			return;
+		}
+		// phpcs:enable WordPress.Security.NonceVerification.Recommended
+
+		$min = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '.min' : '' );
+		$url = '/includes/js/class-alg-wc-mac-backend' . $min . '.js';
+
+		wp_enqueue_script(
+			'class-alg-wc-mac-backend',
+			alg_wc_mac()->plugin_url() . $url,
+			array(),
+			alg_wc_mac()->version,
+			true
+		);
+
 	}
 
 	/**
@@ -61,8 +70,12 @@ class Alg_WC_MAC_Settings_Tabs extends Alg_WC_MAC_Settings_Section {
 	 */
 	function get_select_all_buttons() {
 		return
-			'<a href="#" class="button alg-wc-mac-select-all">'   . __( 'Select all', 'my-account-customizer-for-woocommerce' )   . '</a>' . ' ' .
-			'<a href="#" class="button alg-wc-mac-deselect-all">' . __( 'Deselect all', 'my-account-customizer-for-woocommerce' ) . '</a>';
+			'<a href="#" class="button alg-wc-mac-select-all">' .
+				__( 'Select all', 'my-account-customizer-for-woocommerce' ) .
+			'</a>' . ' ' .
+			'<a href="#" class="button alg-wc-mac-deselect-all">' .
+				__( 'Deselect all', 'my-account-customizer-for-woocommerce' ) .
+			'</a>';
 	}
 
 	/**
@@ -72,7 +85,7 @@ class Alg_WC_MAC_Settings_Tabs extends Alg_WC_MAC_Settings_Section {
 	 * @since   1.1.0
 	 *
 	 * @todo    (dev) "User roles" and "Users": ajax
-	 * @todo    (desc) better desc, e.g. for the "Content" option?
+	 * @todo    (desc) better desc, e.g., for the "Content" option?
 	 * @todo    (dev) content: raw?
 	 * @todo    (dev) better default values?
 	 */
@@ -163,7 +176,7 @@ class Alg_WC_MAC_Settings_Tabs extends Alg_WC_MAC_Settings_Section {
 					'title'    => __( 'Icon', 'my-account-customizer-for-woocommerce' ),
 					'desc'     => sprintf(
 						/* Translators: %1$s: Icon code example, %2$s: Site link. */
-						__( 'You need to enter icon code here, e.g. %1$s. Icon codes are available on %2$s site.', 'my-account-customizer-for-woocommerce' ),
+						__( 'You need to enter icon code here, e.g., %1$s. Icon codes are available on %2$s site.', 'my-account-customizer-for-woocommerce' ),
 						'<code>f2b9</code>',
 						'<a href="https://fontawesome.com/icons?d=gallery&s=regular&m=free" target="_blank">Font Awesome</a>'
 					),

@@ -28,7 +28,7 @@ class Alg_WC_MAC_Tabs {
 	 * @version 2.0.0
 	 * @since   1.1.0
 	 *
-	 * @todo    (dev) `get_option()` only in corresponding hook, i.e. remove `Alg_WC_MAC_Tab` class
+	 * @todo    (dev) `get_option()` only in corresponding hook, i.e., remove `Alg_WC_MAC_Tab` class
 	 */
 	function __construct() {
 		if ( 'yes' === get_option( 'alg_wc_mac_tabs_section_enabled', 'no' ) ) {
@@ -47,7 +47,7 @@ class Alg_WC_MAC_Tabs {
 	 * @since   1.1.0
 	 *
 	 * @todo    (dev) cache result in `$this->tabs`?
-	 * @todo    (dev) `do_shortcode()`: make sure WPML language constant is defined already, i.e. maybe move all this to the `init` hook?
+	 * @todo    (dev) `do_shortcode()`: make sure WPML language constant is defined already, i.e., maybe move all this to the `init` hook?
 	 */
 	function get_tabs() {
 		$tabs       = array();
@@ -119,7 +119,7 @@ class Alg_WC_MAC_Tabs {
 	 * @version 1.1.0
 	 * @since   1.1.0
 	 *
-	 * @todo    (dev) do we need to check if it's the `tabs` section? i.e. maybe rewrite on any section save?
+	 * @todo    (dev) do we need to check if it's the `tabs` section? i.e., maybe rewrite on any section save?
 	 */
 	function flush_rewrite_rules() {
 		global $current_section;
