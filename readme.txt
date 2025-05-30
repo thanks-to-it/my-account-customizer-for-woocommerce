@@ -3,7 +3,7 @@ Contributors: algoritmika, thankstoit, anbinder, karzin
 Tags: woocommerce, my account, woo commerce
 Requires at least: 4.4
 Tested up to: 6.8
-Stable tag: 1.3.3
+Stable tag: 2.0.0
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -58,7 +58,7 @@ This ensures that all custom fields and tabs added to the "My Account" section c
 
 == Changelog ==
 
-= 2.0.0 - 28/05/2025 =
+= 2.0.0 - 30/05/2025 =
 * Dev - Security - Output escaped.
 * Dev - PHP v8.2 compatibility (dynamic properties).
 * Dev - Code refactoring.
