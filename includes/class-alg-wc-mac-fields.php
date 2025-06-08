@@ -286,28 +286,53 @@ class Alg_WC_MAC_Fields {
 	 * @since   1.0.0
 	 */
 	function edit_account_form() {
+
 		$user_id = get_current_user_id();
 		$html    = '';
+
 		foreach ( $this->get_fields() as $field_id => $field_data ) {
 			$html .= $this->get_field_html( $user_id, $field_id, $field_data, false );
 		}
+
 		echo wp_kses( $html, $this->get_allowed_html() );
+
+		wp_nonce_field(
+			'alg_wc_mac_profile_fields',
+			'_alg_wc_mac_nonce_profile_fields'
+		);
+
 	}
 
 	/**
 	 * save_account_details.
 	 *
-	 * @version 1.1.0
+	 * @version 2.0.0
 	 * @since   1.0.0
 	 */
 	function save_account_details( $user_id ) {
+
+		if (
+			! isset( $_POST['_alg_wc_mac_nonce_profile_fields'] ) ||
+			! wp_verify_nonce(
+				sanitize_text_field( wp_unslash( $_POST['_alg_wc_mac_nonce_profile_fields'] ) ),
+				'alg_wc_mac_profile_fields'
+			)
+		) {
+			wp_die( esc_html__( 'Invalid nonce.', 'my-account-customizer-for-woocommerce' ) );
+		}
+
 		foreach ( $this->get_fields() as $field_id => $field_data ) {
 			if ( ! $this->do_save_field_type( $field_data['type'] ) ) {
 				continue;
 			}
-			$value = ( isset( $_POST[ $field_id ] ) ? wc_clean( wp_unslash( $_POST[ $field_id ] ) ) : '' ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized, WordPress.Security.NonceVerification.Missing
+			$value = (
+				isset( $_POST[ $field_id ] ) ?
+				wc_clean( wp_unslash( $_POST[ $field_id ] ) ) : // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+				''
+			);
 			update_user_meta( $user_id, $field_id, $value );
 		}
+
 	}
 
 	/**
@@ -351,14 +376,18 @@ class Alg_WC_MAC_Fields {
 	 * @todo    (feature) optional description in header
 	 */
 	function admin_show_extra_profile_fields( $user ) {
+
 		if ( ! $this->admin_check_current_user( $user->ID ) ) {
 			return false;
 		}
+
 		$user_id = $user->ID;
 		$html    = '';
+
 		foreach ( $this->get_fields() as $field_id => $field_data ) {
 			$html .= $this->get_field_html( $user_id, $field_id, $field_data, true );
 		}
+
 		if ( ! empty( $html ) ) {
 			echo (
 				'<h2>' .
@@ -374,57 +403,92 @@ class Alg_WC_MAC_Fields {
 				'</tbody></table>'
 			);
 		}
+
+		wp_nonce_field(
+			'alg_wc_mac_admin_profile_fields',
+			'_alg_wc_mac_nonce_admin_profile_fields'
+		);
+
 	}
 
 	/**
 	 * admin_update_profile_fields.
 	 *
-	 * @version 1.1.0
+	 * @version 2.0.0
 	 * @since   1.0.0
-	 *
-	 * @todo    (dev) nonce?
 	 */
 	function admin_update_profile_fields( $user_id ) {
+
 		if ( ! $this->admin_check_current_user( $user_id ) ) {
 			return false;
 		}
+
+		if (
+			! isset( $_POST['_alg_wc_mac_nonce_admin_profile_fields'] ) ||
+			! wp_verify_nonce(
+				sanitize_text_field( wp_unslash( $_POST['_alg_wc_mac_nonce_admin_profile_fields'] ) ),
+				'alg_wc_mac_admin_profile_fields'
+			)
+		) {
+			wp_die( esc_html__( 'Invalid nonce.', 'my-account-customizer-for-woocommerce' ) );
+		}
+
 		foreach ( $this->get_fields() as $field_id => $field_data ) {
 			if ( ! $this->do_save_field_type( $field_data['type'] ) ) {
 				continue;
 			}
-			$value = ( isset( $_POST[ $field_id ] ) ? wc_clean( wp_unslash( $_POST[ $field_id ] ) ) : '' ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized, WordPress.Security.NonceVerification.Missing
+			$value = (
+				isset( $_POST[ $field_id ] ) ?
+				wc_clean( wp_unslash( $_POST[ $field_id ] ) ) : // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+				''
+			);
 			if ( '' !== $value || 'no' === $field_data['required'] ) {
 				update_user_meta( $user_id, $field_id, $value );
 			}
 		}
+
 	}
 
 	/**
 	 * admin_user_profile_update_errors.
 	 *
-	 * @version 1.1.0
+	 * @version 2.0.0
 	 * @since   1.0.0
 	 */
 	function admin_user_profile_update_errors( $errors, $update, $user ) {
-		if ( $update ) {
-			foreach ( $this->get_fields() as $field_id => $field_data ) {
-				if ( ! $this->do_save_field_type( $field_data['type'] ) ) {
-					continue;
-				}
-				if ( 'yes' === $field_data['required'] ) {
-					if ( ! isset( $_POST[ $field_id ] ) || '' === $_POST[ $field_id ] ) { // phpcs:ignore WordPress.Security.NonceVerification.Missing
-						$errors->add(
-							'empty_' . $field_id,
-							sprintf(
-								/* Translators: %s: Field title. */
-								__( '<strong>ERROR</strong>: "%s" is required.', 'my-account-customizer-for-woocommerce' ),
-								$field_data['title']
-							)
-						);
-					}
+
+		if ( ! $update ) {
+			return;
+		}
+
+		if (
+			! isset( $_POST['_alg_wc_mac_nonce_admin_profile_fields'] ) ||
+			! wp_verify_nonce(
+				sanitize_text_field( wp_unslash( $_POST['_alg_wc_mac_nonce_admin_profile_fields'] ) ),
+				'alg_wc_mac_admin_profile_fields'
+			)
+		) {
+			wp_die( esc_html__( 'Invalid nonce.', 'my-account-customizer-for-woocommerce' ) );
+		}
+
+		foreach ( $this->get_fields() as $field_id => $field_data ) {
+			if ( ! $this->do_save_field_type( $field_data['type'] ) ) {
+				continue;
+			}
+			if ( 'yes' === $field_data['required'] ) {
+				if ( ! isset( $_POST[ $field_id ] ) || '' === $_POST[ $field_id ] ) {
+					$errors->add(
+						'empty_' . $field_id,
+						sprintf(
+							/* Translators: %s: Field title. */
+							__( '<strong>ERROR</strong>: "%s" is required.', 'my-account-customizer-for-woocommerce' ),
+							$field_data['title']
+						)
+					);
 				}
 			}
 		}
+
 	}
 
 }

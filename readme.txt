@@ -58,9 +58,11 @@ This ensures that all custom fields and tabs added to the "My Account" section c
 
 == Changelog ==
 
-= 2.0.0 - 30/05/2025 =
+= 2.0.0 - 08/06/2025 =
 * Dev - Security - Output escaped.
+* Dev - Security - Nonce added.
 * Dev - PHP v8.2 compatibility (dynamic properties).
+* Dev - Load the "Font Awesome" library locally.
 * Dev - Code refactoring.
 * Dev - Coding standards improved.
 * WC tested up to: 9.8.

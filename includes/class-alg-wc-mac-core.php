@@ -49,9 +49,7 @@ class Alg_WC_MAC_Core {
 		}
 
 		// Font Awesome
-		if ( 'yes' === get_option( 'alg_wc_mac_load_font_awesome', 'no' ) ) {
-			add_action( 'wp_enqueue_scripts', array( $this, 'load_font_awesome' ) );
-		}
+		add_action( 'wp_enqueue_scripts', array( $this, 'load_font_awesome' ) );
 
 		// "Account details" fields
 		$this->fields = require_once plugin_dir_path( __FILE__ ) . 'class-alg-wc-mac-fields.php';
@@ -67,24 +65,25 @@ class Alg_WC_MAC_Core {
 	/**
 	 * load_font_awesome.
 	 *
-	 * @version 1.1.0
+	 * @version 2.0.0
 	 * @since   1.1.0
 	 *
 	 * @todo    (dev) retest this
+	 * @todo    (v2.0.0) load a newer version
 	 */
 	function load_font_awesome() {
-		if ( is_account_page() ) {
-			$src = get_option(
-				'alg_wc_mac_font_awesome_src',
-				'//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css'
-			);
-			wp_enqueue_style(
-				'alg-wc-mac-font-awesome',
-				$src,
-				array(),
-				alg_wc_mac()->version
-			);
+		if (
+			'no' === get_option( 'alg_wc_mac_load_font_awesome', 'no' ) ||
+			! is_account_page()
+		) {
+			return;
 		}
+		wp_enqueue_style(
+			'alg-wc-mac-font-awesome',
+			alg_wc_mac()->plugin_url() . '/includes/css/font-awesome/all.min.css',
+			array(),
+			'5.11.2'
+		);
 	}
 
 }

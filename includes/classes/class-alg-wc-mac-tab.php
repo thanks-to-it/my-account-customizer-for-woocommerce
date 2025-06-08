@@ -25,7 +25,7 @@ class Alg_WC_MAC_Tab {
 	/**
 	 * Constructor.
 	 *
-	 * @version 1.3.0
+	 * @version 2.0.0
 	 * @since   1.1.0
 	 */
 	function __construct( $data ) {
@@ -45,7 +45,7 @@ class Alg_WC_MAC_Tab {
 		add_filter( 'query_vars',                                             array( $this, 'query_vars' ), 0 );
 		add_filter( 'woocommerce_account_menu_items',                         array( $this, 'add_link' ) );
 		add_action( 'woocommerce_account_' . $this->data['id'] . '_endpoint', array( $this, 'get_content' ) );
-		add_action( 'wp_head',                                                array( $this, 'set_icon' ) );
+		add_action( 'wp_enqueue_scripts',                                     array( $this, 'set_icon' ) );
 
 	}
 
@@ -107,11 +107,34 @@ class Alg_WC_MAC_Tab {
 	 * @since   1.1.0
 	 */
 	function set_icon() {
-		if ( $this->data['icon'] ) {
-			echo '<style>' .
-				'.woocommerce-MyAccount-navigation ul li.woocommerce-MyAccount-navigation-link--' . esc_attr( $this->data['id'] ) . ' a::before { ' . 'content: "\\' . esc_attr( $this->data['icon'] ) . '";' . ' }' .
-			'</style>';
+
+		if (
+			! $this->data['icon'] ||
+			! is_account_page()
+		) {
+			return;
 		}
+
+		$min = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '.min' : '' );
+		$url = '/includes/css/alg-wc-mac-frontend' . $min . '.css';
+
+		wp_enqueue_style(
+			'alg-wc-mac-frontend',
+			alg_wc_mac()->plugin_url() . $url,
+			array(),
+			alg_wc_mac()->version
+		);
+
+		ob_start();
+		?>
+		.woocommerce-MyAccount-navigation ul li.woocommerce-MyAccount-navigation-link--<?php echo esc_attr( $this->data['id'] ); ?> a::before {
+			content: "\<?php echo esc_attr( $this->data['icon'] ); ?>";
+		}
+		<?php
+		$css = ob_get_clean();
+
+		wp_add_inline_style( 'alg-wc-mac-frontend', $css );
+
 	}
 
 	/**

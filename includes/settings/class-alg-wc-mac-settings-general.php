@@ -87,7 +87,11 @@ class Alg_WC_MAC_Settings_General extends Alg_WC_MAC_Settings_Section {
 			),
 			array(
 				'title'    => __( 'Load "Font Awesome"', 'my-account-customizer-for-woocommerce' ),
-				'desc'     => __( 'Load', 'my-account-customizer-for-woocommerce' ),
+				'desc'     => sprintf(
+					/* Translators: %s: Version. */
+					__( 'Load (%s)', 'my-account-customizer-for-woocommerce' ),
+					'v5.11.2'
+				),
 				'desc_tip' => (
 					sprintf(
 						/* Translators: %s: Site link. */
@@ -99,13 +103,6 @@ class Alg_WC_MAC_Settings_General extends Alg_WC_MAC_Settings_Section {
 				'id'       => 'alg_wc_mac_load_font_awesome',
 				'default'  => 'no',
 				'type'     => 'checkbox',
-			),
-			array(
-				'desc_tip' => __( '"Font Awesome" library URL.', 'my-account-customizer-for-woocommerce' ),
-				'id'       => 'alg_wc_mac_font_awesome_src',
-				'default'  => '//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css',
-				'type'     => 'text',
-				'css'      => 'width:100%;',
 			),
 			array(
 				'type'     => 'sectionend',

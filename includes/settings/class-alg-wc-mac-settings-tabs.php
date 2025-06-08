@@ -35,6 +35,8 @@ class Alg_WC_MAC_Settings_Tabs extends Alg_WC_MAC_Settings_Section {
 	 *
 	 * @version 2.0.0
 	 * @since   1.3.0
+	 *
+	 * @todo    (v2.0.0) use `hook_suffix`?
 	 */
 	function enqueue_scripts( $hook_suffix ) {
 
@@ -50,10 +52,10 @@ class Alg_WC_MAC_Settings_Tabs extends Alg_WC_MAC_Settings_Section {
 		// phpcs:enable WordPress.Security.NonceVerification.Recommended
 
 		$min = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '.min' : '' );
-		$url = '/includes/js/class-alg-wc-mac-backend' . $min . '.js';
+		$url = '/includes/js/alg-wc-mac-backend' . $min . '.js';
 
 		wp_enqueue_script(
-			'class-alg-wc-mac-backend',
+			'alg-wc-mac-backend',
 			alg_wc_mac()->plugin_url() . $url,
 			array(),
 			alg_wc_mac()->version,
